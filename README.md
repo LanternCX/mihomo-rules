@@ -24,11 +24,11 @@
 
 `Default` 是默认出海入口。
 
-该分组包含 `DIRECT`、`Auto`、`Select` 和三条 IPv4 节点。
+该分组包含华为云中转、`DIRECT`、`Auto`、`Select` 和三条 DMIT IPv4 节点。
 
 ### Auto
 
-`Auto` 包含三条 IPv4 协议节点：HY2、Reality 和 XHTTP。
+`Auto` 包含华为云中转及三条 DMIT IPv4 协议节点：HY2、Reality 和 XHTTP。
 
 IPv6 节点没有放入 `Auto`，避免无 IPv6 路由时断网。
 
@@ -52,15 +52,19 @@ IPv6 节点只在这里手动选择。
 
 ### Microsoft
 
-`Microsoft` 默认把 `DIRECT` 放在前面。
-
-该配置保留 OneDrive、Microsoft 服务在可直连时优先直连的使用习惯，同时允许手动切换出海。
+`Microsoft` 提供华为云中转、`DIRECT`、其他策略组和 DMIT IPv4 节点，支持手动切换 OneDrive 与 Microsoft 服务的线路。华为云选项排在首位。
 
 ### Direct
 
 `Direct` 只包含 `DIRECT`。
 
 用于国内、局域网和明确直连流量。
+
+### 华为云备用链路
+
+`☁️ 华为云中转 → DMIT` 节点提供 VLESS + WebSocket + TLS 中转入口，可在直连 DMIT 不稳定时选用。使用前需填写服务器地址、UUID、TLS 服务名、WebSocket 路径与 Host。
+
+该节点可在 `Default`、`Auto`、`Select`、`Develop`、`Media/Social`、`Microsoft` 中选用。华为云选项排在首位，手动选择组在没有已保存选择时使用首项。
 
 ## 规则覆盖
 

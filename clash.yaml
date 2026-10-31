@@ -71,6 +71,21 @@ geox-url:
   geosite: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
   mmdb: https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb
 proxies:
+- name: ☁️ 华为云中转 → DMIT
+  type: vless
+  server: <redacted>
+  port: 443
+  uuid: <redacted>
+  tls: true
+  servername: <service-domain>
+  client-fingerprint: chrome
+  network: ws
+  udp: true
+  skip-cert-verify: false
+  ws-opts:
+    path: <redacted>
+    headers:
+      Host: <service-domain>
 - name: 🌀 DMIT-HY2
   type: hysteria2
   server: <redacted>
@@ -147,6 +162,7 @@ proxy-groups:
 - name: 🚀 Default
   type: select
   proxies:
+  - ☁️ 华为云中转 → DMIT
   - DIRECT
   - ♻️ Auto
   - 🧩 Select
@@ -156,6 +172,7 @@ proxy-groups:
 - name: ♻️ Auto
   type: url-test
   proxies:
+  - ☁️ 华为云中转 → DMIT
   - 🌀 DMIT-HY2
   - 🛡️ DMIT-Reality
   - 🧪 DMIT-XHTTP
@@ -166,6 +183,7 @@ proxy-groups:
 - name: 🧩 Select
   type: select
   proxies:
+  - ☁️ 华为云中转 → DMIT
   - DIRECT
   - 🌀 DMIT-HY2
   - 🛡️ DMIT-Reality
@@ -176,6 +194,7 @@ proxy-groups:
 - name: 💻 Develop
   type: select
   proxies:
+  - ☁️ 华为云中转 → DMIT
   - 🚀 Default
   - ♻️ Auto
   - 🧩 Select
@@ -185,6 +204,7 @@ proxy-groups:
 - name: 🎬 Media/Social
   type: select
   proxies:
+  - ☁️ 华为云中转 → DMIT
   - 🚀 Default
   - ♻️ Auto
   - 🧩 Select
@@ -194,6 +214,7 @@ proxy-groups:
 - name: Ⓜ️ Microsoft
   type: select
   proxies:
+  - ☁️ 华为云中转 → DMIT
   - DIRECT
   - 🚀 Default
   - ♻️ Auto
