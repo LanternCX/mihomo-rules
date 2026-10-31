@@ -84,6 +84,8 @@ IPv6 节点只在这里手动选择。
 - China / ChinaMax
 - Proxy / Global
 
+每个规则集使用独立的相对缓存路径，避免多个规则集覆盖同一文件。
+
 ## DNS
 
 ### Clash DNS
