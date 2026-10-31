@@ -87,7 +87,7 @@ proxies:
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: www.microsoft.com
+  servername: <reality-servername>
   client-fingerprint: chrome
   reality-opts:
     public-key: <redacted>
@@ -123,7 +123,7 @@ proxies:
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: www.microsoft.com
+  servername: <reality-servername>
   client-fingerprint: chrome
   reality-opts:
     public-key: <redacted>
