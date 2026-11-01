@@ -71,7 +71,7 @@ dns:
   - 'https://doh.pub/dns-query#DIRECT'
   - 'https://cloudflare-dns.com/dns-query#🔎 DNS'
   - 'https://dns.google/dns-query#🔎 DNS'
-  direct-nameserver-follow-policy: false
+  direct-nameserver-follow-policy: true
   respect-rules: true
 geodata-mode: true
 geox-url:

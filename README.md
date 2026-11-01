@@ -95,7 +95,7 @@ Clash 配置启用 DNS 接管。
 
 DNS 服务仅监听本机回环地址，避免局域网设备访问解析端口。
 
-DNS 查询、上游域名引导解析和代理服务器域名解析均使用 DoH，失败时不回退到明文 DNS。
+订阅默认的 DNS 查询、上游域名引导解析和代理服务器域名解析均使用 DoH，失败时不回退到明文 DNS。用户可在客户端配置自己的域名解析策略。
 
 代理服务器域名解析使用 `proxy-server-nameserver`，同样配置为 DoH，避免 Clash 为连接代理节点而先发起明文 DNS 查询。
 
@@ -109,14 +109,16 @@ TUN 开启 strict route，并劫持常规 DNS 请求与 TCP DNS 请求，减少�
 
 国内域名同时配置阿里、腾讯直连 DoH，以及经 `🔎 DNS` 查询的 Cloudflare、Google DoH；国外域名使用经 `🔎 DNS` 查询的 Cloudflare、Google DoH。
 
-`direct-nameserver` 同样包含这四个上游，并关闭 `direct-nameserver-follow-policy`，避免直连解析被单一域名策略限制。多个上游并发查询，某个供应商或直连路径超时后，其他可用上游仍可返回结果。
+`direct-nameserver` 同样包含这四个上游，并启用 `direct-nameserver-follow-policy`，使直连连接遵守域名解析策略。多个上游并发查询，某个供应商或直连路径超时后，其他可用上游仍可返回结果。
 
-普通查询额外配置 Cloudflare、Google DoH 作为 `fallback`。`nameserver-policy` 优先于普通查询的 fallback，因此每条域名策略也分别配置多个上游；fallback 结果仍受 `fallback-filter` 筛选。
+订阅不固定校园域名、内网 DNS 或网卡名。用户通过客户端覆写配置添加的 `nameserver-policy` 在直连解析时同样生效，校园和内网访问规则由用户自行设置。
+
+普通查询额外配置 Cloudflare、Google DoH 作为 `fallback`。`nameserver-policy` 优先于普通查询的 fallback，因此公网 DNS 域名策略也分别配置多个上游；fallback 结果仍受 `fallback-filter` 筛选。
 
 `🔎 DNS` 是独立的自动回退组，按 Reality、XHTTP、HY2 顺序选用可用的 IPv4 节点，每 60 秒通过 IP 形式的 HTTPS 地址检查连通性。不绑定华为云，也不随 `Default` 的手动选择变化。三个协议共享同一台 VPS，因此不能覆盖整台 VPS 离线的故障。
 
 `default-nameserver` 和 `proxy-server-nameserver` 使用 IP 形式的 DoH，同时配置直连和经 `🔎 DNS` 的上游。DNS 组内节点的服务器地址必须填写 IP，避免解析代理服务器时形成循环依赖。
 
-网站连接仍按原有规则分流。若所有加密上游及代理路径均不可用，解析会失败，不降级为明文查询。
+网站连接按规则分流。订阅默认的加密上游及代理路径均不可用时，解析会失败，不降级为明文查询；用户自定义的域名策略使用其指定的 DNS。
 
 局域网、本机和私有地址保留直连处理。
